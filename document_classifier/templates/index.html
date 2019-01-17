@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+</head>
+ 
+<body>
+<form>
+    <input type="text"  name="InNumber" id="words" align="center" class="searchbox" placeholder="input your words...">
+    <input class="submitbutton" type="button" name="btn1" value="predict" align="center" onclick="sendwords()">
+    <p class="resultoutput">The predict result is: </p>
+    <p class="resultoutput" id="result"></p>
+    <!-- <p>ewfwef</p> -->
+    <script src='static/jquery-3.3.1.min.js'></script>
+    <script type="text/javascript">
+    sendwords = function(){
+        var data = {}
+        data["words"] = document.getElementById("words").value; 
+        $.ajax({
+        url: "predict",
+        type: "GET",
+        data: data,
+        dataType: "json",
+        success: function (data) {
+            result = data['result']
+            var obj = document.getElementById("result");  
+            obj.innerText= result;   
+        }
+        })
+    };
+	</script>
+</form>
+</body>
+<style type="text/css">
+body{
+	background-color:#55ffcc;
+}
+form
+{
+	width:1000px;
+	margin:auto;
+	margin-top:250px;
+}
+.searchbox
+{
+	width:80%;
+	padding:10px;
+	font-size:20px;
+}
+.submitbutton
+{
+	width:15%;
+	padding:10px;
+	font-size:20px;
+	background-color:#333399;
+	color:white;
+}
+.resultoutput
+{
+	font-size:20px;
+}
+</style>
+</html>
